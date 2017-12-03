@@ -1,7 +1,8 @@
 # YASMS (Yet Another Secure Messaging System)
  A secure messaging system that enables users to exchange text messages. Users of the system may use real 
-authenticated identities or might opt to use pseudo (made-up) identities (each user can have more than one such identities). 
-Furthermore, the following are considered important requirements (expressed as user stories):
+authenticated identities or might opt to use pseudo identities, where each user can have more than one such identity. 
+
+The following user stories are considered important requirements:
 - If Alice wants to talk to Bob, then Bob must issue or share a ticket that enables such a message to be delivered. Such a 
 ticket might be thought of as a capability that only the intended user may use (Alice in this example). Tickets should 
 have expiry dates and may also be revoked by their issuer at any point of time.
