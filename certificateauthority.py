@@ -16,6 +16,7 @@ from datetime import datetime
 import utils
 import time
 from utils import myip
+from utils import to_msg
 # Normally the certificate authority will handle two things 
 # Authentication and directory handling
 # Data Formatting applies here, incoming messages should contain
@@ -67,6 +68,7 @@ class CertificateAuthority(socketserver.BaseRequestHandler):
             the_chr = chr(the_byte_flag)
             if ord(the_chr) == ascii.EOT:
                     break
+        acc = acc[:-1]
         return acc
         pass
     def authenticate(self, user_req):
@@ -147,6 +149,10 @@ class CertificateAuthority(socketserver.BaseRequestHandler):
 
     
 # Here we support the directory functionality
+# The simulation
+#       i
+#       i
+#       i
 if __name__ == "__main__":
     HOST, PORT = "localhost", 9999
     socketserver.TCPServer.allow_reuse_address = True

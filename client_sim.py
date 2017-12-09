@@ -13,6 +13,7 @@ from utils import myip
 import sqlite3
 import oauth2
 import utils
+#from utils import to_bytes
 class client(object):
     # Here implementing the authentication functionality
     # B ip will be request via the directory service from the CA authority
@@ -31,6 +32,8 @@ class client(object):
             the_chr = chr(the_byte_flag)
             if ord(the_chr) == ascii.EOT:
                     break
+        acc = acc[:-1]
+        print ('\n', acc,'\n')
         return acc
 
     def create_db():
@@ -61,6 +64,7 @@ class client(object):
         
         auth_req_as_msg.append(ascii.EOT)
         return auth_req_as_msg
+    
     def parse_CA_res(self,msg_bytes):
         info_about_peer = pickle.loads(msg_bytes)
         info_to_peer = (info_about_peer.__dict__["FifthPart_enc_asbytes"])
@@ -89,28 +93,42 @@ class client(object):
         B_ip = '127.0.0.1'
         KB = 12312
         self.auth_com(B_ip, KB)
+    #def authenticate_peer_req(self, peer_req):
+        
     def serve_peer_req(self):
         self.sock.listen(1)
         conn, addr = self.sock.accept()
-        self.receive_message_till_EOT()
+        self.sock = conn
+        peer_req = self.receive_message_till_EOT()
+"""    def parse_peer_req(self, peer_req):
 
+        self.Na2_res = 
+    def send_response(self):
+        resp_to_peer = BtoAmsg(self.Na2_res)
+
+        response = BtoAmsg(B, A, )
+        #print(conn)
+        #conn.recv(1024)
+"""
 # Create a socket (SOCK_STREAM means a TCP socket)
  
 try:
     # Connect to server and send data
     #imagine encrypting Na2
     # should encrypt Na2 after pickling it
+    
     if (sys.argv[2] == '-c'):
         
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.connect(('127.0.0.1', CAport))
-
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR , 1)
         this_machine = client(sys.argv[1], sock)
 
         this_machine.connect_to("B")
     if (sys.argv[2] == '-s'):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.bind(("localhost", peerport))
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR , 1)
         this_machine = client(sys.argv[1], sock)
         this_machine.serve_peer_req()
 finally:

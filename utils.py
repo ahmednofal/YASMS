@@ -11,3 +11,12 @@ def myip():
         return ip
 peerport = 8880
 CAport = 9999
+def pickle_to_bytearr(obj):
+    obj = bytearray(pickle.dumps(obj))
+def to_msg(**kwargs):
+    acc = bytearray(bytes("", encoding = "utf_8"))
+    for key in kwargs:
+        pickle_to_bytearr(key)
+
+        acc.extend(key)
+

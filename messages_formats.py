@@ -89,6 +89,20 @@ class FourthPart(object):
         self.B_ip = B_ip
         self.FifthPart_enc_asbytes= FifthPart_enc_asbytes
 # All messages int the system are to use this class, the mtype specifies mmessage type whether it is an authentication protocol message or not, for now , there are other types that could be added 
+class BtoAmsg(object):
+    def __init__(self,
+            B_ip = B,
+            A_ip = A,
+            Na2_res_enc_asbytes_KB_1 = bytearray(bytes("", encoding = 'utf_8')),
+            TS =TS_,
+            L = L_):
+        self.B_ip = B_ip
+        self.A_ip = A_ip
+        self.Na2_res_enc_asbytes_KB_1= Na2_res_enc_asbytes_KB_1
+
+        self.TS = TS
+        self.L = L
+
 class message(object):
     def __init__(self,
             mtype = mtype_,
